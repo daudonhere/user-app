@@ -8,10 +8,6 @@ import styles from '../../styles/page.module.scss';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-import Dialog from '@mui/material/Dialog';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 import Avatar from '@mui/material/Avatar';
 import Link from '@mui/material/Link';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -22,6 +18,11 @@ import { Typography } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { CardActionArea } from '@mui/material';
+import CustomDialog from '../../components/CustomDialogCompoent';
+
+
+
+{/* This is Nextjs ISR method */}
 
 export async function getStaticPaths() {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users`);
@@ -49,8 +50,8 @@ export async function getStaticProps({ params }) {
   };
 }
 
+
 function Id({ user }) {
-  console.log(user)
   const router = useRouter();
   const theme = useTheme();
   const [loading, setLoading] = useState(false);
@@ -85,18 +86,10 @@ function Id({ user }) {
           <Toolbar />
           <Box className={styles.boxContentStyle}>
             <Container maxWidth="x1">
-              <Dialog
-                fullScreen={fullScreen}
-                maxWidth={maxWidth}
-                fullWidth={fullWidth}
-                open={dialog}
-                aria-labelledby="responsive-dialog-title"
-              >
-                <DialogTitle id="responsive-dialog-title">{"401 UNAUTHORIZED"}</DialogTitle>
-                <DialogContent>
-                  <DialogContentText>You must login first to access this page</DialogContentText>
-                </DialogContent>
-              </Dialog>
+
+              {/* This is an imported component */}
+              <CustomDialog fullScreen={fullScreen} maxWidth={maxWidth} fullWidth={fullWidth} open={dialog} />
+
               <Box sx={{ flexGrow: 1 }}>
                 {loading ? (
                   <CircularProgress color="success" size={42} />

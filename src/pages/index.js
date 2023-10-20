@@ -11,11 +11,9 @@ import TextField from '@mui/material/TextField';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
-import Backdrop from '@mui/material/Backdrop';
-import AlertTitle from '@mui/material/AlertTitle';
-import {checkToken} from '../utils/checkToken';
+import { checkToken } from '../utils/checkToken';
+import LoadingProgress from '../components/LoadingProgressComponent';
+import CustomSnackbar from '../components/CustomSnackbarComponent';
 
 function Index() {
     const router = useRouter();
@@ -93,37 +91,11 @@ function Index() {
                 }}
                 className={styles.loginBoxStyle}>
                 <Grid container>
-                    <Backdrop
-                        sx={{
-                            color: '#fff',
-                            zIndex: (theme) => theme.zIndex.drawer + 1
-                        }}
-                        open={isLogin}>
-                        <CircularProgress
-                            color="inherit"
-                            variant="determinate"
-                            value={progress}
-                            size={70}
-                            sx={{
-                                position: 'relative',
-                                '&::after' : {
-                                    position: 'absolute',
-                                    top: '50%',
-                                    left: '50%',
-                                    transform: 'translate(-50%, -50%)'
-                                }
-                            }}/>
-                        <Typography
-                            variant="caption"
-                            sx={{
-                                position: 'absolute',
-                                top: '50%',
-                                left: '50%',
-                                transform: 'translate(-50%, -50%)'
-                            }}>
-                            {`${Math.round(progress)}%`}
-                        </Typography>
-                    </Backdrop>
+
+                    {/* This is an imported component */}
+                    <LoadingProgress isLogin={isLogin} progress={progress} />
+
+
                     <Grid item xs={7}>
                         <Box className={styles.textLoginStyle}>
                             <Typography className={styles.titleLoginStyle}>
@@ -165,32 +137,11 @@ function Index() {
                                     Forgot Password ?
                                 </Link>
                             </List>
-                            <Snackbar open={snackbar} autoHideDuration={3000} onClose={handleCloseSnackbar}>
-                                <Alert
-                                    onClose={handleCloseSnackbar}
-                                    severity={isLogin
-                                        ? "success"
-                                        : "error"}
-                                    variant="filled"
-                                    sx={{
-                                        width: '40vh'
-                                    }}>
-                                    <AlertTitle>{
-                                            isLogin
-                                                ? "Success"
-                                                : "Error"
-                                        }</AlertTitle>
-                                    {
-                                        isLogin
-                                            ? ("Login Succes.")
-                                            : (
-                                                isError
-                                                    ? isError
-                                                    : "Something Wrong."
-                                            )
-                                    }
-                                </Alert>
-                            </Snackbar>
+
+                            {/* This is an imported component */}
+                            <CustomSnackbar open={snackbar} onClose={handleCloseSnackbar} isLogin={isLogin} isError={isError} />
+
+
                         </Box>
                     </Grid>
                 </Grid>

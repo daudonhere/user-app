@@ -9,10 +9,6 @@ import axios from 'axios';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-import Dialog from '@mui/material/Dialog';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 import Avatar from '@mui/material/Avatar';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
@@ -21,8 +17,9 @@ import AppbarComponent from '../../components/AppbarComponent';
 import { Typography } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import Backdrop from '@mui/material/Backdrop';
 import { CardActionArea } from '@mui/material';
+import CustomBackdrop from '../../components/CustomBackdropComponent';
+import CustomDialog from '../../components/CustomDialogCompoent';
 
 function Index() {
   const router = useRouter();
@@ -85,41 +82,11 @@ function Index() {
           <Toolbar />
           <Box className={styles.boxContentStyle}>
             <Container maxWidth="xl">
-              <Backdrop
-                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                open={clickDetail}
-              >
-                <CircularProgress
-                  color="inherit"
-                  variant="determinate"
-                  value={progress}
-                  size={70} 
-                  sx={{
-                    position: 'relative',
-                    '&::after': {
-                      position: 'absolute',
-                      top: '50%',
-                      left: '50%',
-                      transform: 'translate(-50%, -50%)',
-                    },
-                  }}
-                />
-                <Typography variant="caption" sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-                  {`${Math.round(progress)}%`}
-                </Typography>
-              </Backdrop>
-              <Dialog
-                fullScreen={fullScreen}
-                maxWidth={maxWidth}
-                fullWidth={fullWidth}
-                open={dialog}
-                aria-labelledby="responsive-dialog-title"
-              >
-                <DialogTitle id="responsive-dialog-title">{"401 UNAUTHORIZED"}</DialogTitle>
-                <DialogContent>
-                  <DialogContentText>You must login first to access this page</DialogContentText>
-                </DialogContent>
-              </Dialog>
+
+              {/* This is an imported component */}
+              <CustomBackdrop open={clickDetail} progress={progress} />
+              <CustomDialog fullScreen={fullScreen} maxWidth={maxWidth} fullWidth={fullWidth} open={dialog} />
+
               {loading ? (
                 <CircularProgress color="success" size={42} />
               ) : (
