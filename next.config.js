@@ -1,13 +1,7 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-    reactStrictMode: true,
-    env: {
-      API_ENDPOINT: process.env.NEXT_PUBLIC_API_URL
-    },
-    images: {
-      domains: ['localhost'],
-    },
-  }
-  
-  module.exports = nextConfig
-  
+const path = require('path')
+ 
+module.exports = {
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles')],
+  },
+}
