@@ -20,6 +20,12 @@ You can start editing the page by modifying `app/page.js`. The page auto-updates
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## API ENDPOINT
+
+- [Reqres](https://reqres.in)
+
+You can login using email "eve.holt@reqres.in" and random password, if you want check error login you don't need to fill in a password or email form.
+
 ## TECH STACK
 
 The technology used in this project includes:
